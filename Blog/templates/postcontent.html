@@ -1,1 +1,23 @@
-<h1>My content will go here<h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div>
+            {% for post in posts %}
+            <p>{{ post.title }}</p>
+            <p>{{ post.name.username }}</p>
+            <p>{{post.date_of_post}}</p>
+            <img src="{{ post.image.url }}" alt="Image" height="200px", width="200px">
+            <p>{{post.description}}</p>
+            <p>{{ post.post}}</P>
+            {% endfor %}
+        </div>
+    </body>
+</html>

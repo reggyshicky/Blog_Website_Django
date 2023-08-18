@@ -5,8 +5,19 @@ from django.contrib import messages
 # views are functions that are incharge of processing a users request when they visit a certain url or endpoint in the website 
 # func that posts to the view and view links the url to the db for storage, request is the http response. after all is done 
 # The web page[index.html] will be loaded with the posted data ie posting a pic in fb
-def post(request):
-    return render(request, "index.html")
+def login(request):
+    if request.method == "POST":
+        userjina = request.POST["user_name"]
+        passwad = request.POST["password1"]
+        
+        user = auth.authenticate(username = userjina, password=passwad)
+        if user is not None:
+            auth.login(request, user) # auth.login is an inbuilt django method
+            return redirect("content")
+        else:
+            message.error(request, f"Invalid Credentials")
+            return redirect("login")
+    return render(request, "login.html")
 
 def register(request):
     if request.method == "POST":
@@ -33,5 +44,8 @@ def register(request):
             messages.error(request, f"password not matching")
             return redirect("register")
 
-    return render(request, "homepage.html")
+    return render(request, "register.html")
 
+def logout(request):
+    auth.logout(request)
+    return redirect("content")
