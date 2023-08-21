@@ -15,7 +15,7 @@ def login(request):
             auth.login(request, user) # auth.login is an inbuilt django method
             return redirect("content")
         else:
-            message.error(request, f"Invalid Credentials")
+            messages.error(request, f"Invalid Credentials")
             return redirect("login")
     return render(request, "login.html")
 
@@ -29,7 +29,7 @@ def register(request):
         password2 = request.POST["password2"]
 
         if password1 == password2:
-            if User.objects.filter(username = username).exists():
+            if User.objects.filter(username = username).exists(): # querying the db if the username already exists in the database
                 messages.error(request, f"username already exists")
                 return redirect("register")
             elif User.objects.filter(email = email).exists():
@@ -43,6 +43,9 @@ def register(request):
         else:
             messages.error(request, f"password not matching")
             return redirect("register")
+        # In these lines, username and email on the left side are the field names in the database that you're 
+        # checking against. The username on the right side is the value you've extracted from the form fields 
+        # using username = request.POST["user_name"] and similarly for email.
 
     return render(request, "register.html")
 
