@@ -11,12 +11,13 @@
     <body>
         <div>
             {% for post in posts %}
+            <a href="{% url 'details' post.pk %}">
             <p>{{ post.title }}</p>
+            </a>
             <p>{{ post.name.username }}</p>
             <p>{{post.date_of_post}}</p>
             <img src="{{ post.image.url }}" alt="Image" height="200px", width="200px">
             <p>{{post.description}}</p>
-            <p>{{ post.post}}</P>
             {% endfor %}
         </div>
     </body>
