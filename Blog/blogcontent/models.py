@@ -22,6 +22,16 @@ class Blog(models.Model):
     
     def __str__(self):
         return f"{self.title} {self.date_of_post}"
+
+class Comment(models.Model):
+    comment = models.TextField(max_length = 250)
+    date_of_comment = models.DateField(auto_now_add = True) #means if a user comments, the time they commented shall always remain
+    user = models.ForeignKey(User, on_delete=models.PROTECT) #protect means you can delete user who has comments, you have delete commnets first and the you can delete the user
+    post_comment = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"{self.user.username} {self.post_comment}"
+    
     
     
     

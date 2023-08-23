@@ -1,5 +1,9 @@
+{% extends "layout.html" %}
+{% block homepage %}
 {% for cat in categories %}
 <a href="{% url 'each_category' the_category=cat.category %}">
 <p>{{ cat.category }}</P>
 </a>
     {% endfor %}
+
+{% endblock %}

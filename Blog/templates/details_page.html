@@ -1,10 +1,6 @@
-<!DOCTYPE>
-<html>
-    <head>
-
-    </head>
-    <body>
-        <h1>Details Page</h1>
+{% extends "layout.html" %}
+{% block Homepage %}
+<h1>Details Page</h1>
         <div>
             <div>
                 <p>{{ post.title }}</p>
@@ -14,6 +10,36 @@
                 <p>{{post.description}}</p>
                 <p>{{ post.post}}</P>
             </div>
+            <div>
+                <hr>
+                <br>
+                {% for comment in comments %}
+                <div>
+                    <h6>{{ comment.user.username }} {{ comment.date_of_comment }}</h6>
+                    <p>{{ comment.comment }}</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-    </body>
-</html>
+        <div>
+            <div>
+                <form action= "{% url 'comment' pk=post.pk %}" method="POST">
+                    {% csrf_token %}
+                    <textarea name="comment"></textarea>
+                    <label>message</label>
+                    <div>
+                        {% if user.is_authenticated %}
+                        <button class="btn btn-primary" type="submit">comment</button>
+                        {% else %}
+                        <div>
+                        <a href="{% url 'register' %}">register</a>
+                        </div>
+                        <br>
+                        <button class="btn btn-primary" type="submit" disabled>comment</button>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+{% endblock %}

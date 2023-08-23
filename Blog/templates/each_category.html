@@ -1,21 +1,14 @@
-<!DOCTYPE>
-<html>
-    <head>
-
-    </head>
-    <body>
-        <h1>{{cat}}</h1>
-        <div>
-            <div>
-                {% for post in posts %}
-                <p>{{ post.title }}</p>
-                <p>{{ post.name.username }}</p>
-                <p>{{post.date_of_post}}</p>
-                <img src="{{ post.image.url }}" alt="Image" height="200px", width="200px">
-                <p>{{post.description}}</p>
-                <p>{{ post.post}}</P>
-                    {% endfor %}
-            </div>
-        </div>
-    </body>
-</html>
+{% extends "layout.html" %}
+{% block Homepage %}
+<h1>{{cat}}</h1>
+<div>
+    {% for post in posts %}
+        <p>{{ post.title }}</p>
+        <p>{{ post.name.username }}</p>
+        <p>{{post.date_of_post}}</p>
+        <img src="{{ post.image.url }}" alt="Image" height="200px", width="200px">
+        <p>{{post.description}}</p>
+        <p>{{ post.post}}</P>
+            {% endfor %}
+</div>
+{% endblock %}
