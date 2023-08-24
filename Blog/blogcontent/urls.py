@@ -7,4 +7,5 @@ urlpatterns = [
         path("categories", views.all_categories, name="categories"),
         path("category/<str:the_category>", views.each_category, name="each_category"),
         path("comment/<int:pk>", views.comment, name="comment"),
+        path("review/<int:pk>", views.review, name="review")
         ]

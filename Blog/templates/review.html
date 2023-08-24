@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block Homepage %}
+<h2>Reviews</h2>
+<div>
+    <h3>{{ postreview.title }}</h3>
+    <hr>
+    {% for review in all_reviews %}
+    <h6>{{ review.date_of_review }}</h6>
+    <p> <strong>{{ review.user.first_name }} {{ review.user.last_name }}</strong> {{ review.review }}</p>
+    <br>
+    <br>
+    {% endfor %}
+    <div>
+        <form action="{% url 'review' pk=postreview.pk %}" method="POST">
+            {% csrf_token %}
+            <div>
+                <label>Reviews</label>
+                <input type="text", name="review">
+            </div>
+            <br>
+            <div>
+                <button class="btn btn-success" type="submit">Submit review</button>
+            </div>    
+        </form>
+    </div>
+    
+</div>
+{% endblock %}

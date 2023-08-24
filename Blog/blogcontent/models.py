@@ -19,6 +19,10 @@ class Blog(models.Model):
     description = models.TextField(max_length = 200)
     image = models.ImageField(upload_to = "images")
     category = models.ForeignKey(Category, on_delete=models.CASCADE) # 1 represents to the PK of our default category
+    post_likes = models.ManyToManyField(User, blank=True, related_name="like") #tracks likes, blank=True,  its not a must for a blog to be liked
+    liked = models.BooleanField(default=False)  # tracks if user has liked or not
+    
+    
     
     def __str__(self):
         return f"{self.title} {self.date_of_post}"
@@ -31,6 +35,17 @@ class Comment(models.Model):
     
     def __str__(self):
         return f"{self.user.username} {self.post_comment}"
+    
+class Review(models.Model):
+    post_review = models.ForeignKey(Blog, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    date_of_review = models.DateField(auto_now_add = True)
+    review = models.TextField(max_length=300)
+    
+    def __str__(self):
+        return f"Review for {self.post_review} by {self.user.username}"
+    
+    
     
     
     

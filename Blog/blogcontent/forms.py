@@ -5,4 +5,4 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         
-        fields = ["comment"]
+        fields = ["comment"]  # we made a form to access the module forms that assist in validation , rather than manual validation 
