@@ -1,7 +1,10 @@
-from django.shortcuts import render, redirect
-from .models import Blog, Comment, Review
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from .models import Blog, Comment, Review, Like
 from .models import Category
-from .forms import CommentForm
+from .forms import CommentForm, EditPostForm
+from django.contrib import messages
 
 
 def postcontent(request):
@@ -16,9 +19,13 @@ def postcontent(request):
 def detail_page(request, pk):  # PK is the primary key
     post = Blog.objects.get(pk=pk) #get() returns only one
     comments = Comment.objects.filter(post_comment = pk)
+    likes = Like.objects.filter(post=post, liked=True)
+    print()
+    print(likes)
     context = {
         "post": post,
-        "comments": comments
+        "comments": comments,
+        "likes": likes
     }
     
     return render(request, "details_page.html", context)
@@ -90,5 +97,38 @@ def review(request, pk): #pk  -id of the post being commented on
     }
                 
     return render(request, "review.html", context)
+
+def postLike(request, pk):
+    post = get_object_or_404(Blog, pk=pk)
+    like, created = Like.objects.get_or_create(post=post,
+                                               user=request.user)
+    if created or not like.liked:
+        like.liked = True
+        like.likes += 1
+    else:
+        like.liked = False
+        like.likes -= 1
+        
+    like.save()
+    return HttpResponseRedirect(reverse("details", args=(post.pk,)))
+
+def editPost(request, pk):
+    post = Blog.objects.get(pk=pk)
+    if request.method == "POST":
+        editform = EditPostForm(request.POST, request.FILES, instance=post)
+        if editform.is_valid():
+            editform.save()
+            messages.success(request, f"changes have been saved")
+            return redirect("editpost", pk=pk)
+    else:
+        editform = EditPostForm(instance=post)
+    
+    context = {
+        "editform": editform,
+        "post": post
+    }
+            
+    return render(request, "editPost.html", context)
+    
 
     

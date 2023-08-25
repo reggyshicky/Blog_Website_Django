@@ -26,6 +26,23 @@ urlpatterns = [
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
 In Django's URL routing system, the path function takes two arguments: the URL pattern to match and the view 
 function to execute when that pattern is matched. In this case, path('', include('blogcontent.urls')) means 
