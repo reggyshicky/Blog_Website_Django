@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# This script automates the process of pushing to Github
+
+# check if git is installed
+if ! command -v git &> /dev/null; then
+	echo "Git is not installed. Please install Git and try again."
+exit 1
+fi
+
+# checking if the script is being run inside a git respository
+if ! git rev-parse --is-inside-work-tree &> /dev/null; then
+	echo "You are not inside a Git repository. Please navigate to the repository root and try again."
+	exit 1
+fi
+
+# add modified files to staging area
+git add -u
+
+# check for untracked files and filter out those ignored by Git
+untracked_files=$(git ls-files --others --exclude-standard)
+
+if [ -n "$untracked_files" ]; then
+	echo -e "Untracked files found:"
+	echo -e "$untracked_files"
+	read -p "Do you want to add them to the commit? (y/n): " add_untracked
+	if [ "$add_untracked" == "y" ]; then
+		git add "$untracked_files"
+	fi
+fi
+
+# check if there are changes to commit
+if git status --porcelain | grep -E '^(M|A|D)' &> /dev/null; then
+	# get the commit message fron user input
+	read -p "Enter a commit message: " commit_message
+
+	git commit -m "$commit_message"
+
+	# push to the remote repository (origin). you can change feature to your branch
+	if git push origin feature; then
+		echo "Changes pushed to GitHub successfully."
+	else
+		echo "Failed to push changes."
+	fi
+else
+	echo "Nothing to push. Your branch is up-to-date."
+fi

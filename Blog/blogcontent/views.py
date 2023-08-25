@@ -128,7 +128,7 @@ def editPost(request, pk):
         "post": post
     }
             
-    return render(request, "editPost.html", context)
+    return render(request, "editPost.html", context)  #frontend functionaluiity
     
 
     
