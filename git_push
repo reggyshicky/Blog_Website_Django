@@ -36,7 +36,7 @@ if git status --porcelain | grep -E '^(M|A|D)' &> /dev/null; then
 	git commit -m "$commit_message"
 
 	# push to the remote repository (origin). you can change feature to your branch
-	if git push origin feature; then
+	if git push origin master; then
 		echo "Changes pushed to GitHub successfully."
 	else
 		echo "Failed to push changes."
