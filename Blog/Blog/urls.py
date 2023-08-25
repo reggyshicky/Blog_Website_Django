@@ -25,3 +25,13 @@ urlpatterns = [
     path('', include('blogcontent.urls')),
 
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+"""
+In Django's URL routing system, the path function takes two arguments: the URL pattern to match and the view 
+function to execute when that pattern is matched. In this case, path('', include('blogcontent.urls')) means 
+that when a user visits the root URL of your website (e.g., http://example.com/), the URL routing system will 
+look into the blogcontent.urls URL configuration to determine which view function should handle this request.
+So, the '' in the path function is not a space but rather an empty string that represents the base URL of your 
+application. It's a way of saying "when the user visits the main page of the website (root URL), use the URL 
+patterns defined in 'blogcontent.urls' to determine the appropriate view to render.
+"""
