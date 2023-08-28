@@ -19,7 +19,7 @@ def postcontent(request):
 def detail_page(request, pk):  # PK is the primary key
     post = Blog.objects.get(pk=pk) #get() returns only one
     comments = Comment.objects.filter(post_comment = pk)
-    likes = Like.objects.filter(post=post, liked=True)
+    likes = post.total_likes
     print()
     print(likes)
     context = {
@@ -104,10 +104,10 @@ def postLike(request, pk):
                                                user=request.user)
     if created or not like.liked:
         like.liked = True
-        like.likes += 1
+        like.likes = 1
     else:
         like.liked = False
-        like.likes -= 1
+        like.likes = 0
         
     like.save()
     return HttpResponseRedirect(reverse("details", args=(post.pk,)))

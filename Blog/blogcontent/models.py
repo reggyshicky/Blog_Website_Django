@@ -25,6 +25,17 @@ class Blog(models.Model):
     def __str__(self):
         return f"{self.title} {self.date_of_post}"
     
+    @property # you can access it like an attribute , just like the above attributes
+    def total_likes(self):
+        likes = Like.objects.filter(post=self, liked=True)  #post in class Like
+        total = 0
+        if likes:
+            for like in likes: #likes in line 30
+                total += like.likes  #likes in line 41
+        return total
+        
+        
+    
 class Like(models.Model):
     post = models.ForeignKey(Blog, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
