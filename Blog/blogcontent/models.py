@@ -20,7 +20,8 @@ class Blog(models.Model):
     image = models.ImageField(upload_to = "images")
     category = models.ForeignKey(Category, on_delete=models.CASCADE) # 1 represents to the PK of our default category
     
-    
+    class Meta:
+        ordering = ("-date_of_post", )# to be order from the latest
     
     def __str__(self):
         return f"{self.title} {self.date_of_post}"

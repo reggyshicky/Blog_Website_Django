@@ -13,3 +13,10 @@ class EditPostForm(forms.ModelForm):
         
         fields = ["title", "post", "name","description",
                   "image", "category"]
+        
+class CreatePostForm(forms.ModelForm):
+    class Meta:
+        model = Blog
+        
+        fields = ["title", "post", "description",
+                  "image", "category"]

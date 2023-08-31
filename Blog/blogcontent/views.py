@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Blog, Comment, Review, Like
 from .models import Category
-from .forms import CommentForm, EditPostForm
+from .forms import CommentForm, EditPostForm, CreatePostForm
 from django.contrib import messages
 
 
@@ -129,6 +129,31 @@ def editPost(request, pk):
     }
             
     return render(request, "editPost.html", context)  #frontend functionaluiity
-    
 
+def createPost(request):
+    
+    
+    
+    if request.method == "POST":
+        title = request.POST["title"]
+        post = request.POST["post"]
+        description = request.POST["description"]
+        category = request.POST["category"]
+        name = request.user
+        image = request.FILES
+        category = Category.objects.get(category=category) #an instance of an category
+        
+        post = Blog.objects.create(
+            title = title,
+            post = post,
+            name = name,
+            description = description,
+            image = image,
+            category = category  
+        )
+        post.save()
+        messages.success(request, f"Blog created succesfully")
+        return redirect("content")
+    return render(request, "newpost.html")
+    
     

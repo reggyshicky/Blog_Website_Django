@@ -1,10 +1,35 @@
-{%% extends "layout.html" %}
-{% block for Homepage%}
+{% extends "layout.html" %}
+{% block Homepage %}
 <div>
-    <form>
+    <form action="{% url 'createpost' %}" method="POST">
+        {% csrf_token %}
         <div>
-            <label></label>
-            <input>
+            <label>title</label>
+            <textarea type="text" name="title" required></textarea>
+        </div>
+        <br>
+        <div>
+            <label>post</label>
+            <textarea type="text" name="post" required></textarea>
+        </div>
+        <br>
+        <div>
+            <label>description</label>
+            <textarea type="text" name="description" required></textarea>
+        </div>
+        <br>
+        <div>
+            <label>image</label>
+            <input type="file" name="image">
+        </div>
+        <br>
+        <div>
+            <label>category</label>
+            <textarea type="text" name="category"></textarea>
+        </div>
+        <br>
+        <div>
+            <button type="submit">Create Blog</button>
         </div>
     </form>
 </div>
