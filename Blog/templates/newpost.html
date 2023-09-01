@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block Homepage %}
 <div>
-    <form action="{% url 'createpost' %}" method="POST">
+    <form enctype="multipart/form-data" action="{% url 'createpost' %}" method="POST">
         {% csrf_token %}
         <div>
             <label>title</label>

@@ -2,6 +2,9 @@
 {% block Content %}
 <h1>Clean Code</h1>
 <a href="{% url 'createpost' %}"><h5>Create Blog</h5></a>
+<a href="{% url 'register' %}"><h5>Register</5></a>
+<a href="{% url 'login' %}"><h5>Login</5></a>
+<a href="{% url 'logout' %}"><h5>Logout</5></a>
 <div class="row">
     <div class="col-4">
         {% for post in posts %}

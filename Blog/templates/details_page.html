@@ -9,6 +9,7 @@
                 <img src="{{ post.image.url }}" alt="Image" height="200px", width="200px">
                 <p>{{post.description}}</p>
                 <p>{{ post.post}}</P>
+                <a href="{% url 'editpost' pk=post.pk %}"><h5>Edit Post</5></a>
             </div>
             <div>
                 <br>
