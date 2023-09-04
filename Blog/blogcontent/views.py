@@ -157,3 +157,7 @@ def createPost(request):
     return render(request, "newpost.html")
     
     
+def deletePost(request, pk):
+    post = get_object_or_404(Blog, pk=pk)
+    post.delete()
+    return redirect("content")

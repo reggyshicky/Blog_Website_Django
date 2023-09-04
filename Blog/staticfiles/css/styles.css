@@ -1,0 +1,11 @@
+.reg {
+    background-color:bisque;
+
+}
+.title {
+    color:green;
+    font-family: sans-serif;
+    font-size: 40px;
+    font-weight: 40px;
+    margin: 10px 0 0 0;
+}

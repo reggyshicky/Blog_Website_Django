@@ -1,22 +1,29 @@
 {% extends "layout.html" %}
 {% block Content %}
-<h1>Clean Code</h1>
+<h3>Clean Code</h3>
 <a href="{% url 'createpost' %}"><h5>Create Blog</h5></a>
-<a href="{% url 'register' %}"><h5>Register</5></a>
-<a href="{% url 'login' %}"><h5>Login</5></a>
-<a href="{% url 'logout' %}"><h5>Logout</5></a>
+<a href="{% url 'register' %}"><h5>Register</h5></a>
+<a href="{% url 'login' %}"><h5>Login</h5></a>
+<a href="{% url 'logout' %}"><h5>Logout</h5></a>
 <div class="row">
     <div class="col-4">
         {% for post in posts %}
         <a href="{% url 'details' post.pk %}">
         <p>{{ post.title }}</p>
         </a>
-        <p>{{ post.name.username }}</p>
-        <p>{{post.date_of_post}}</p>
+        <ul>
+            <li>{{ post.name.username }}</li>
+            <li>{{post.date_of_post}}</li>
+        </ul>
+        <li>
+            <form action="{% url 'deletepost' pk=post.pk %}" method="POST">
+                {% csrf_token %}
+                <button type=submit class="btn btn-danger">Delete</button>
+            </form>
+        </li>
         <p>{{post.description}}</p>
         {% endfor %}
     </div>
 </div>
 {% endblock %}
-
 

@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 {% block Homepage %}
-<div >
+<div class="container reg">
     <div >
-        <h1>Registration</h1>
+        <h1 class="title">Registration</h1>
         <form action="{% url 'register' %}" method="POST">
             {% csrf_token %}
             <div>
