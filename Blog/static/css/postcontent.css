@@ -1,0 +1,61 @@
+/* styles.css */
+
+/* Header styles */
+h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Navigation links */
+  .nav-links {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .nav-links li {
+    display: inline;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    margin: 10px;
+  }
+  
+  /* Blog post styles */
+  .col-4 {
+    margin-top: 20px;
+  }
+  
+  p {
+    font-size: 18px;
+    margin: 10px 0;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  /* Delete button style */
+  .btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  /* Add more styles as needed */
+  

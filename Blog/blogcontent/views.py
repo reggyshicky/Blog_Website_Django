@@ -119,7 +119,8 @@ def editPost(request, pk):
         if editform.is_valid():
             editform.save()
             messages.success(request, f"changes have been saved")
-            return redirect("editpost", pk=pk)
+            #return redirect("editpost", pk=pk)
+            return redirect("details", pk=pk)
     else:
         editform = EditPostForm(instance=post)
     
@@ -131,9 +132,6 @@ def editPost(request, pk):
     return render(request, "editPost.html", context)  #frontend functionaluiity
 
 def createPost(request):
-    
-    
-    
     if request.method == "POST":
         title = request.POST["title"]
         post = request.POST["post"]
@@ -141,8 +139,11 @@ def createPost(request):
         category = request.POST["category"]
         name = request.user
         image = request.FILES
-        category = Category.objects.get(category=category) #an instance of an category
-        
+        #category = Category.objects.get(category=category) #an instance of an category
+        try:
+            category = Category.objects.get(category=category)
+        except Category.DoesNotExist:
+            category = Category.objects.create(category=category)
         post = Blog.objects.create(
             title = title,
             post = post,

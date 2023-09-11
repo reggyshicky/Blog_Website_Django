@@ -67,7 +67,7 @@ button[type="submit"]:hover {
 }
 
 /* Responsive design */
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .form-container {
         width: 100%;
     }
